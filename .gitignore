@@ -1,0 +1,6 @@
+Pastas ou arquivos que não podem subir no github:
+
+node_modules/
+.env*
+*.db
+generated/prisma/

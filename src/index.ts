@@ -8,5 +8,5 @@ const server = https.createServer(app);
 const PORT = process.env.PORT || 8080;
 
 //Iniciar o servidor
-server.listen(PORT, () => console.info("porta"));
+server.listen(PORT, () => console.info("porta", PORT));
 

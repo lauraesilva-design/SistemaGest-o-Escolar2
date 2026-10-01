@@ -71,4 +71,3 @@ routes.delete("/aluno/:id", (request, response) => {
 
 });
 
-export default routes;

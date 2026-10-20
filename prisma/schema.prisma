@@ -37,7 +37,7 @@ model Funcionarios{
   nome       String
   email      String   @unique
   cargo      String
-  nascimento DateTime
+  nascimento DateTime?
   cpf        String   @unique
   senha      String
   telefone   Int?

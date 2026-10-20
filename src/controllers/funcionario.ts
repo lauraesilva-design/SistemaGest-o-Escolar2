@@ -38,9 +38,9 @@ export default {
   list: async (request: Request, response: Response) => {
     try {
       const funcionario = await prisma.funcionarios.findMany({
-        where: {
-
-        },
+        omit:{
+          senha: true,
+        }
       });
 
       return response.status(200).json(funcionario);
@@ -56,6 +56,9 @@ export default {
         where: {
           id: +id,
         },
+        omit:{
+          senha: true,
+        },
       });
 
       return response.status(200).json(funcionario);
@@ -69,7 +72,7 @@ export default {
       const { nome, email, cargo, nascimento, cpf, senha, telefone, endereco } =
         request.body;
 
-      if (!nome || !email || !cargo || !nascimento || !cpf || !senha || !telefone || !endereco) {
+      if (!nome || !email || !cargo || !cpf || !senha ) {
         return response.status(400).json("Dados do funcionario incompletos");
       }
 
@@ -78,11 +81,14 @@ export default {
           nome,
           email,
           cargo,
-          nascimento: new Date(nascimento),
+          nascimento: nascimento ? new Date(nascimento) : undefined,
           cpf,
-          senha,
+          senha:bcrypt.hashSync(senha, +process.env.BCRYPT_ROUNDS!),
           telefone,
           endereco,
+        },
+        omit:{
+          senha: true,
         },
       });
 
@@ -106,11 +112,14 @@ export default {
           nome,
           email,
           cargo,
-          nascimento: new Date(nascimento),
+          nascimento: nascimento ? new Date(nascimento) : undefined,
           cpf,
-          senha,
+          senha: senha ? bcrypt.hashSync(senha, +process.env.BCRYPT_ROUNDS!) : undefined,
           telefone,
           endereco,
+        },
+        omit:{
+          senha: true,
         },
       });
 
@@ -127,6 +136,9 @@ export default {
       const funcionario = await prisma.funcionarios.delete({
         where: {
           id: +id,
+        },
+        omit:{
+          senha: true,
         },
       });
 

@@ -3,9 +3,9 @@ import alunoController from "./controllers/aluno";
 import cursoController from "./controllers/curso";
 import matriculaController from "./controllers/matricula";
 import funcionarioController from "./controllers/funcionario";
-import { authentication } from "../middlewares/authentication";
-import { isAdmin } from "../middlewares/permissions";
-import {isAdminOrHimself} from "../middlewares/permissions";
+import { authentication } from "./middlewares/authentication";
+import { isAdmin } from "./middlewares/permissions";
+import {isAdminOrHimself} from "./middlewares/permissions";
 
 // Inicializa o router
 const routes = Router();
